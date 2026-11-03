@@ -8,6 +8,8 @@ use SuperKernel\Attribute\Configuration;
 use SuperKernel\Contract\VendorDirInterface;
 use SuperKernel\Swoole\Config\SwooleConfigInterface;
 
+use function str_starts_with;
+
 use const DIRECTORY_SEPARATOR;
 
 #[Configuration(SwooleConfigInterface::class)]
@@ -22,9 +24,19 @@ final readonly class SwooleConfig implements SwooleConfigInterface
         return false;
     }
 
+    /**
+     * Keeps the PID file in the vendor cache directory. A Phar offers no writable location, so the application then
+     * runs in the foreground without one; daemon mode needs an absolute path outside the archive.
+     */
     public function pidFile(): ?string
     {
-        return $this->vendorDir . DIRECTORY_SEPARATOR . '.cache' . DIRECTORY_SEPARATOR . 'super-kernel.pid';
+        $vendorDirectory = (string) $this->vendorDir;
+
+        if (str_starts_with($vendorDirectory, 'phar://')) {
+            return null;
+        }
+
+        return $vendorDirectory . DIRECTORY_SEPARATOR . '.cache' . DIRECTORY_SEPARATOR . 'super-kernel.pid';
     }
 
     public function displayErrors(): bool
