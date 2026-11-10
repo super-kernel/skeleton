@@ -7,24 +7,24 @@
         "php": ">=8.4.27 <8.5",
         "ext-swoole": ">=6.2.3 <6.3",
         "psr/http-message": "^2.0",
-        "super-kernel/aop": "^1.0.0-alpha.1",
-        "super-kernel/attribute": "^1.0.0-alpha.1",
-        "super-kernel/autoloader": "^1.0.0-alpha.1",
-        "super-kernel/command": "^1.0.0-alpha.1",
-        "super-kernel/config": "^1.0.0-alpha.1",
-        "super-kernel/context": "^1.0.0-alpha.1",
-        "super-kernel/contract": "^1.0.0-alpha.1",
-        "super-kernel/di": "^1.0.0-alpha.1",
-        "super-kernel/environment": "^1.0.0-alpha.1",
-        "super-kernel/event-dispatcher": "^1.0.0-alpha.1",
-        "super-kernel/exception-dispatcher": "^1.0.0-alpha.1",
-        "super-kernel/framework": "^1.0.0-alpha.1",
-        "super-kernel/http-message": "^1.0.0-alpha.1",
-        "super-kernel/http-server": "^1.0.0-alpha.1",
-        "super-kernel/logger": "^1.0.0-alpha.1",
-        "super-kernel/process": "^1.0.0-alpha.1",
-        "super-kernel/server": "^1.0.0-alpha.1",
-        "super-kernel/swoole": "^1.0.0-alpha.1"
+        "super-kernel/aop": "^1.0.0-alpha.2",
+        "super-kernel/attribute": "^1.0.0-alpha.2",
+        "super-kernel/autoloader": "^1.0.0-alpha.2",
+        "super-kernel/command": "^1.0.0-alpha.2",
+        "super-kernel/config": "^1.0.0-alpha.2",
+        "super-kernel/context": "^1.0.0-alpha.2",
+        "super-kernel/contract": "^1.0.0-alpha.2",
+        "super-kernel/di": "^1.0.0-alpha.2",
+        "super-kernel/environment": "^1.0.0-alpha.2",
+        "super-kernel/event-dispatcher": "^1.0.0-alpha.2",
+        "super-kernel/exception-dispatcher": "^1.0.0-alpha.2",
+        "super-kernel/framework": "^1.0.0-alpha.2",
+        "super-kernel/http-message": "^1.0.0-alpha.2",
+        "super-kernel/http-server": "^1.0.0-alpha.2",
+        "super-kernel/logger": "^1.0.0-alpha.2",
+        "super-kernel/process": "^1.0.0-alpha.2",
+        "super-kernel/server": "^1.0.0-alpha.2",
+        "super-kernel/swoole": "^1.0.0-alpha.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.95.27",
@@ -53,7 +53,10 @@
     "scripts": {
         "format": "@php vendor/bin/php-cs-fixer fix --show-progress=bar --no-ansi",
         "format:check": "@php vendor/bin/php-cs-fixer check --show-progress=bar --no-ansi --diff",
-        "start": "@php bin/bootstrap.php swoole:start",
-        "test": "@php vendor/bin/phpunit"
+        "start": "skernel run swoole:start",
+        "test": [
+            "skernel build",
+            "@php vendor/bin/phpunit"
+        ]
     }
 }
