@@ -14,6 +14,9 @@ auth.json
 .env
 .env.*
 
+# SKERNEL
+/skernel.json
+
 # Runtime and logs
 *.log
 *.pid
